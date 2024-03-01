@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Image Viewer Yuval Hilai 318609237</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        .thumbnail {
+            cursor: pointer;
+            margin: 5px;
+        }
+        .thumbnail.selected {
+            border: 2px solid blue;
+        }
+        .main-image {
+            max-width: 500px;
+            margin: 20px 0;
+        }
+        .button-container {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body ng-app="imageApp" ng-controller="imageController">
+    <h1>AngularJS Image Viewer</h1>
+    
+    <div class="thumbnails">
+        <img ng-repeat="image in images"
+             ng-src="{{image.thumbnailUrl}}"
+             ng-click="selectImage($index)"
+             ng-class="{ 'thumbnail': true, 'selected': $index === selectedIndex }">
+    </div>
+    
+    <div class="main-image">
+        <img ng-src="{{selectedImage.url}}" ng-show="selectedImage">
+    </div>
+
+    <div class="button-container">
+        <button ng-click="prevImage()" ng-disabled="selectedIndex === 0">Previous</button>
+        <button ng-click="nextImage()" ng-disabled="selectedIndex === images.length - 1">Next</button>
+    </div>
+
+</body>
+</html>
